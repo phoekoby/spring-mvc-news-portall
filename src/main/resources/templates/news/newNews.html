@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Bootstrap Bundle JS (jsDelivr CDN) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <title>Create New News</title>
+</head>
+<body>
+      <header class="head" style="margin-bottom: 100px;">
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link active" th:href="@{/news}">Вернуться на главную</a>
+            </li>
+            </ul>
+      </nav>
+      </header>
+      <div class="container w-50" >
+            <form method="POST" enctype="multipart/form-data"
+                  action="/news" class="row justify-content-center align-items-center" >
+      
+            <div class="text-center mb-4">
+            <h1 class="h3 mb-3 font-weight-normal">Upload files</h1>
+            <p>Файл должен быть архивом zip</p>
+            <p>В файле должен находиться один файл file.txt,<br> где первая строчка - заголовок, вторая - тело новости.</p>
+            </div>
+            <div class="form-label-group">
+                <input type="radio" class="btn-check" name="type" value="none" id="option1" autocomplete="off" checked>
+                <label class="btn btn-secondary" for="option1">Без категории</label>
+
+                <input type="radio" class="btn-check" name="type" value="sport" id="option2" autocomplete="off">
+                <label class="btn btn-secondary" for="option2">Спорт</label>
+
+                <input type="radio" class="btn-check" name="type" value="finance" id="option4" autocomplete="off">
+                <label class="btn btn-secondary" for="option4">Финансы</label>
+
+                <input type="radio" class="btn-check" name="type" value="travel" id="option3" autocomplete="off" >
+                <label class="btn btn-secondary" for="option3">Путешествия</label>
+                <br>
+                <br>
+            <input type="file" name="file"   accept="application/zip" class="form-control">
+                <p class="mb-5" style="color: red" th:text="${error}" ></p>
+            </div>
+        <input class="btn btn-lg btn-primary btn-block w-25 " type="submit">
+
+      </form>
+      </div>
+  </body>
+
+</html>
