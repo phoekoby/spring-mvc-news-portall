@@ -23,7 +23,7 @@
 <div class="container w-75 flex-box align-items-center">
     <div class="border border-dark">
         <h1 th:text="${one.getTitle()}"  class="text-center" ></h1>
-        <p class="mh-100 text-center"  th:utext="${one.getBody()}"></p>
+        <p class="mh-100 text-center text-lg-start" style="white-space: pre-line" th:text="${one.getBody()}"></p>
         <div class="text-lg-end">Дата публикации:</div>
         <div th:text="${one.getDate().getDayOfMonth()+'.'
         +one.getDate().getMonthValue()+'.'

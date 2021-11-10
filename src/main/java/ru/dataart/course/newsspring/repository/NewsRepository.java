@@ -22,12 +22,12 @@ public interface NewsRepository extends JpaRepository<News, Long> {
     long count();
 
 
-    long countAllByTypeIsLike(@Param("string") String string);
+    long countAllByCategoryIsLike(@Param("string") String string);
 
     News save(News news);
 
     void deleteById(long id);
 
-    List<News> findAllByTypeIsLikeOrderByDateDesc(String string);
+    List<News> findAllByCategoryIsLikeOrderByDateDesc(String string);
 
 }

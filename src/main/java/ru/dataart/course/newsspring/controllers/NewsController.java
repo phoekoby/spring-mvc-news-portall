@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
-
 @RequestMapping("/news")
 @RequiredArgsConstructor
 @Controller
@@ -31,16 +30,15 @@ public class NewsController {
     public String index(Model model,
                         @RequestParam("page") Optional<Integer> page,
                         @RequestParam("size") Optional<Integer> size,
-                        @RequestParam("type") Optional<String> type) {
+                        @RequestParam("category") Optional<String> category) {
         int currentPage = page.orElse(1);
-        long count = type.map(newsService::getCountByType).orElseGet(newsService::getCountOfAll);
-        String typeOfNews=type.orElse("none");
+        model.addAttribute("currentPage",currentPage);
+        long count = category.map(newsService::getCountByCategory).orElseGet(newsService::getCountOfAll);
+        String categoryOfNews = category.orElse("none");
         int pageSize = size.orElse((int) (count >= 20 ? count / 10 : 2));
-        model.addAttribute("typePage",typeOfNews);
-        Page<News> newsPage = newsService.findPaginated(PageRequest.of(currentPage - 1, pageSize),typeOfNews);
-
+        model.addAttribute("categoryPage", categoryOfNews);
+        Page<News> newsPage = newsService.findPaginated(PageRequest.of(currentPage - 1, pageSize), categoryOfNews);
         model.addAttribute("newsPage", newsPage);
-
         int totalPages = newsPage.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -64,11 +62,11 @@ public class NewsController {
 
     @PostMapping()
     public String createNews(@ModelAttribute("file") MultipartFile file,
-                             @RequestParam("type") String type,
+                             @RequestParam("category") String category,
                              Model model) {
         try {
-            News news =fileHandler.openFile(file);
-            news.setType(type);
+            News news = fileHandler.openFile(file);
+            news.setCategory(category);
             newsService.save(news);
         } catch (InputFileException e) {
             model.addAttribute("error", e.getMessage());

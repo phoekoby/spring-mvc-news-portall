@@ -18,16 +18,16 @@ public class NewsService {
     public List<News> getAllNews() {
         return newsRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
     }
-    public List<News> findByType(String string){
-        return newsRepository.findAllByTypeIsLikeOrderByDateDesc(string);
+    public List<News> findByCategory(String string){
+        return newsRepository.findAllByCategoryIsLikeOrderByDateDesc(string);
     }
 
     public long getCountOfAll() {
         return newsRepository.count();
     }
 
-    public long getCountByType(String string){
-        return newsRepository.countAllByTypeIsLike(string);
+    public long getCountByCategory(String string){
+        return newsRepository.countAllByCategoryIsLike(string);
     }
 
     public News getNewsById(long id) {
@@ -42,10 +42,10 @@ public class NewsService {
         newsRepository.deleteById(id);
     }
 
-    public Page<News> findPaginated(Pageable pageable,String typeOfNews) {
+    public Page<News> findPaginated(Pageable pageable,String categoryOfNews) {
         List<News> allNews;
-        if(typeOfNews.equals("travel")||typeOfNews.equals("sport")||typeOfNews.equals("finance")){
-            allNews=findByType(typeOfNews);
+        if(categoryOfNews.equals("travel")||categoryOfNews.equals("sport")||categoryOfNews.equals("finance")){
+            allNews=findByCategory(categoryOfNews);
         }else {
             allNews = getAllNews();
         }

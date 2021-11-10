@@ -30,14 +30,14 @@ public class News {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @Column(name = "type")
-    private String type = "none";
+    @Column(name = "category")
+    private String category = "none";
 
-    public News(String title, String body, LocalDateTime date, String type) {
+    public News(String title, String body, LocalDateTime date, String category) {
         this.title = title;
         this.body = body;
         this.date = date;
-        this.type = type;
+        this.category = category;
     }
     public News(String title, String body, LocalDateTime date) {
         this.title = title;

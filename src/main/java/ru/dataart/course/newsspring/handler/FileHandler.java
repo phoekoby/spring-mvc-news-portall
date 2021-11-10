@@ -33,23 +33,18 @@ public class FileHandler {
                     if (count > 0) {
                         throw new InputFileException("File has more than 1 files");
                     }
-                    int i;
-                    while ((i = zipInputStream.read()) != -1) {
+                    int character;
+                    while ((character = zipInputStream.read()) != -1) {
                         if (!isBody) {
-                            title.append((char) i);
+                            title.append((char) character);
                         } else {
-                            if(i=='\n'){
-                                body.append("</p><p>");
-                            }else {
-                                body.append((char) i);
-                            }
+                            body.append((char) character);
                         }
-                        if (i == '\n') {
+                        if (character == '\n') {
                             isBody = true;
-                            body.append("<p>");
+                           
                         }
                     }
-                    body.append("</p>");
                     zipInputStream.closeEntry();
                     count++;
                 }
@@ -58,7 +53,7 @@ public class FileHandler {
             } catch (InputFileException e) {
                 throw e;
             } catch (Exception e) {
-                throw new InputFileException("Stream Exp");
+                throw new InputFileException("Stream Exception");
             }
         } else {
             throw new InputFileException("File is Empty");
