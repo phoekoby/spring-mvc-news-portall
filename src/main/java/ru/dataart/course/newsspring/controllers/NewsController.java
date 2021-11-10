@@ -32,7 +32,7 @@ public class NewsController {
                         @RequestParam("size") Optional<Integer> size,
                         @RequestParam("category") Optional<String> category) {
         int currentPage = page.orElse(1);
-        model.addAttribute("currentPage",currentPage);
+        model.addAttribute("currentPage", currentPage);
         long count = category.map(newsService::getCountByCategory).orElseGet(newsService::getCountOfAll);
         String categoryOfNews = category.orElse("none");
         int pageSize = size.orElse((int) (count >= 20 ? count / 10 : 2));

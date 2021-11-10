@@ -42,7 +42,7 @@ public class FileHandler {
                         }
                         if (character == '\n') {
                             isBody = true;
-                           
+
                         }
                     }
                     zipInputStream.closeEntry();
@@ -53,7 +53,7 @@ public class FileHandler {
             } catch (InputFileException e) {
                 throw e;
             } catch (Exception e) {
-                throw new InputFileException("Stream Exception");
+                throw new InputFileException("Incorrect file, try again");
             }
         } else {
             throw new InputFileException("File is Empty");

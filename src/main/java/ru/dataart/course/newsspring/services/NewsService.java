@@ -15,10 +15,12 @@ import java.util.List;
 public class NewsService {
     private final NewsRepository newsRepository;
 
+
     public List<News> getAllNews() {
         return newsRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
     }
-    public List<News> findByCategory(String string){
+
+    public List<News> findByCategory(String string) {
         return newsRepository.findAllByCategoryIsLikeOrderByDateDesc(string);
     }
 
@@ -26,7 +28,7 @@ public class NewsService {
         return newsRepository.count();
     }
 
-    public long getCountByCategory(String string){
+    public long getCountByCategory(String string) {
         return newsRepository.countAllByCategoryIsLike(string);
     }
 
@@ -42,11 +44,11 @@ public class NewsService {
         newsRepository.deleteById(id);
     }
 
-    public Page<News> findPaginated(Pageable pageable,String categoryOfNews) {
+    public Page<News> findPaginated(Pageable pageable, String categoryOfNews) {
         List<News> allNews;
-        if(categoryOfNews.equals("travel")||categoryOfNews.equals("sport")||categoryOfNews.equals("finance")){
-            allNews=findByCategory(categoryOfNews);
-        }else {
+        if (categoryOfNews.equals("travel") || categoryOfNews.equals("sport") || categoryOfNews.equals("finance")) {
+            allNews = findByCategory(categoryOfNews);
+        } else {
             allNews = getAllNews();
         }
         int pageSize = pageable.getPageSize();
@@ -60,7 +62,7 @@ public class NewsService {
             list = allNews.subList(startItem, toIndex);
         }
 
-        return  new PageImpl<>(list, PageRequest.of(currentPage, pageSize), allNews.size());
+        return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), allNews.size());
     }
 
 }

@@ -39,6 +39,7 @@ public class News {
         this.date = date;
         this.category = category;
     }
+
     public News(String title, String body, LocalDateTime date) {
         this.title = title;
         this.body = body;
