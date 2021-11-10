@@ -31,7 +31,7 @@ public class FileHandler {
                 int count = 0;
                 while (zipInputStream.getNextEntry() != null) {
                     if (count > 0) {
-                        throw new InputFileException("File has more than 1 files");
+                        throw new InputFileException("Archive has more than 1 files");
                     }
                     int character;
                     while ((character = zipInputStream.read()) != -1) {
